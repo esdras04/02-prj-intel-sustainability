@@ -15,7 +15,7 @@ body {
 }
 
 header {
-  background-image: url('img/overlay-intel.webp');
+  background-image: url('./img/overlay-intel.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -24,7 +24,6 @@ header {
   text-align: center;
   position: relative;
   overflow: hidden;
-  
 }
 
 header::before {
@@ -65,101 +64,158 @@ header h1 {
 
 header p {
   font-size: 1.2rem;
-
   max-width: 600px;
   margin: 0 auto;
   font-weight: 500;
 }
 
-section {
-  max-width: 800px;
-  margin: 0 auto;
+.timeline-container {
   padding: 3rem 2rem;
   position: relative;
 }
 
-section::before {
+.timeline-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 2rem;
+}
+
+.timeline {
+  display: flex;
+  gap: 2rem;
+  min-width: min-content;
+  padding: 2rem 0;
+  position: relative;
+}
+
+.timeline::before {
   content: '';
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(to bottom, #00aaff, #0071c5);
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #00aaff, #0071c5);
   border-radius: 2px;
-  top: 0;
+  transform: translateY(-50%);
+  z-index: 0;
 }
 
-section div {
-  background: white;
+.timeline-card {
+  flex: 0 0 600px;
+  height: 400px;
+  position: relative;
   border-radius: 12px;
-  padding: 2rem;
-  margin: 2rem 0;
+  overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 113, 197, 0.1);
   transition: all 0.3s ease;
-  border: 1px solid #e0e8f0;
-  border-left: 4px solid #0071c5;
+  cursor: pointer;
+  z-index: 1;
 }
 
-section div:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 113, 197, 0.2);
-  border-left: 4px solid #00aaff;
+.timeline-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(0, 113, 197, 0.25);
 }
 
-section div h2 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #0071c5;
-  margin-bottom: 0.5rem;
-  transition: all 0.3s ease;
-  transform-origin: left center;
-}
-
-section div:hover h2 {
-  color: #00aaff;
-  transform: scale(1.1);
-}
-
-section div h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid transparent;
-  padding-bottom: 0.5rem;
-  transition: border-color 0.3s ease;
-}
-
-section div:hover h3 {
-  border-bottom: 2px solid #0071c5;
-}
-
-section div img {
+.card-image {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 8px;
-  margin: 1rem 0;
   transition: transform 0.3s ease;
 }
 
-section div:hover img {
-  transform: scale(1.03);
+.timeline-card:hover .card-image {
+  transform: scale(1.05);
 }
 
-section div p {
-  color: #666;
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 113, 197, 0.9);
+  color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.timeline-card:hover .card-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-year {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0071c5;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.timeline-card:hover .card-year {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.05);
+}
+
+.card-title {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.card-title h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.timeline-card:hover .card-title {
+  opacity: 0;
+}
+
+.overlay-year {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.overlay-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.overlay-description {
   font-size: 1rem;
   line-height: 1.6;
-  transition: color 0.3s ease;
+  text-align: center;
 }
 
-section div:hover p {
-  color: #444;
-}
-
-body > p:last-child {
+.scroll-indicator {
   text-align: center;
   padding: 2rem;
   font-style: italic;
@@ -168,53 +224,130 @@ body > p:last-child {
   margin-top: 2rem;
 }
 
-section div {
-  opacity: 0;
-  animation: fadeIn 0.6s ease forwards;
+/* Scrollbar styling */
+.timeline-wrapper::-webkit-scrollbar {
+  height: 8px;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.timeline-wrapper::-webkit-scrollbar-track {
+  background: rgba(0, 113, 197, 0.1);
+  border-radius: 4px;
 }
 
+.timeline-wrapper::-webkit-scrollbar-thumb {
+  background: #0071c5;
+  border-radius: 4px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #00aaff;
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
   header {
     padding: 2rem 1rem;
   }
-  
+
   header h1 {
     font-size: 2.2rem;
   }
-  
+
   header p {
     font-size: 1.1rem;
   }
-  
-  section {
+
+  .timeline-container {
     padding: 2rem 1rem;
   }
-  
-  section div {
-    margin: 1.5rem 0;
+
+  .timeline {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .timeline::before {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: auto;
+    width: 4px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+
+  .timeline-wrapper {
+    overflow-x: visible;
+  }
+
+  .timeline-card {
+    flex: none;
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+  }
+
+  .card-year {
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    font-size: 1rem;
+  }
+
+  .card-title {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    padding: 0.8rem;
+  }
+
+  .card-title h3 {
+    font-size: 1.1rem;
+  }
+
+  .card-overlay {
     padding: 1.5rem;
   }
-  
-  section div h2 {
-    font-size: 1.8rem;
+
+  .overlay-year {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
   }
-  
-  section div h3 {
-    font-size: 1.2rem;
+
+  .overlay-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
-  
-  section div img {
-    height: 150px;
+
+  .overlay-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation */
+.timeline-card {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.timeline-card:nth-child(1) { animation-delay: 0.1s; }
+.timeline-card:nth-child(2) { animation-delay: 0.2s; }
+.timeline-card:nth-child(3) { animation-delay: 0.3s; }
+.timeline-card:nth-child(4) { animation-delay: 0.4s; }
+.timeline-card:nth-child(5) { animation-delay: 0.5s; }
+.timeline-card:nth-child(6) { animation-delay: 0.6s; }
+.timeline-card:nth-child(7) { animation-delay: 0.7s; }
+.timeline-card:nth-child(8) { animation-delay: 0.8s; }
+.timeline-card:nth-child(9) { animation-delay: 0.9s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
